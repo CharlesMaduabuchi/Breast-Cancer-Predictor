@@ -1,5 +1,5 @@
-Flask
-joblib
+flask
+flask-cors
 xgboost
+joblib
 numpy
-scikit-learn
