@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Contact Us | MabiHealthCare</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.4.0/fonts/remixicon.css" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <style>
+    .contact__section {
+      max-width: 900px;
+      margin: 5rem auto;
+      padding: 2rem;
+      background-color: var(--primary-color-light);
+      border-radius: 10px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    }
+    .contact__section h1 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      font-size: 2rem;
+      color: var(--primary-color);
+    }
+    .contact__form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .contact__form input,
+    .contact__form textarea {
+      padding: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+    .contact__form textarea {
+      resize: vertical;
+    }
+    .contact__form button {
+      width: fit-content;
+      padding: 0.75rem 2rem;
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .contact__form button:hover {
+      background-color: var(--primary-color-dark);
+    }
+    .success__message {
+      margin-top: 1rem;
+      color: green;
+      font-weight: 600;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="contact__section">
+    <h1>Contact Us</h1>
+    <p style="text-align: center;">We'd love to hear from you. Fill out the form below and we’ll get back to you shortly.</p>
+
+    <form method="POST" action="/contact" class="contact__form">
+      <input type="text" name="name" placeholder="Your Name" required />
+      <input type="email" name="email" placeholder="Your Email" required />
+      <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+
+    {% if message_sent %}
+      <div class="success__message">✅ Thank you! Your message has been sent successfully.</div>
+    {% endif %}
+  </div>
+
+</body>
+</html>

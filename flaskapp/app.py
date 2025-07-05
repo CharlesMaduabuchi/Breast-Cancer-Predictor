@@ -20,10 +20,12 @@ except Exception as e:
     model = None
     print(f"Model loading failed: {e}")
 
+# Home route
 @app.route("/")
 def home():
     return render_template("index.html", feature_names=feature_names)
 
+# API prediction route
 @app.route("/predict", methods=["POST"])
 def predict_api():
     if model is None:
@@ -48,7 +50,8 @@ def predict_api():
         })
     except Exception as e:
         return jsonify({'error': str(e)}), 500
-
+    
+# Form prediction route
 @app.route("/predict-form", methods=["POST"])
 def predict_form():
     try:
@@ -69,6 +72,20 @@ def predict_form():
             feature_names=feature_names,
             error=f"Prediction failed: {str(e)}"
         )
+    
+# ✅ Contact page route
+@app.route("/contact", methods=["GET", "POST"])
+def contact():
+    if request.method == "POST":
+        name = request.form.get("name")
+        email = request.form.get("email")
+        message = request.form.get("message")
+
+        app.logger.info(f"[CONTACT] From: {name} <{email}> | Message: {message}")
+
+        return render_template("contact.html", message_sent=True)
+
+    return render_template("contact.html", message_sent=False)
 
 if __name__ == '__main__':
     app.run(debug=True)
