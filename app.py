@@ -9,16 +9,20 @@ app = Flask(__name__)
 CORS(app)
 logging.basicConfig(level=logging.INFO)
 
+# Define the input features globally
+feature_names = [
+    "radius_mean", "texture_mean", "perimeter_mean", "area_mean",
+    "smoothness_mean", "compactness_mean", "concavity_mean", "concave_point_mean"
+]
+
+
 # Load your trained XGBoost model
 try:
     model = joblib.load("xgb_breast_cancer_model.pkl")
-    feature_names = [
-        "radius_mean", "texture_mean", "perimeter_mean", "area_mean",
-        "smoothness_mean", "compactness_mean", "concavity_mean", "concave_point_mean"
-    ]
+    app.logger.info("Model loaded successfully.")
 except Exception as e:
     model = None
-    print(f"Model loading failed: {e}")
+    app.logger.error(f"Model loading failed: {e}")
 
 # Home route
 @app.route("/")
