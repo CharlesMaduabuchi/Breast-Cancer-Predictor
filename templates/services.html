@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Remix Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.4.0/fonts/remixicon.css" rel="stylesheet" />
+
+  <title>Our Services | Breast Cancer Care</title>
+
+  <style>
+    /* CSS Variables */
+    :root {
+      --bg-color: #fff;
+      --text-color: #222;
+      --card-bg: #f9f9f9;
+      --footer-bg: #eee;
+      --btn-bg: #007bff;
+      --btn-color: #fff;
+      --nav-bg: #fff;
+      --nav-text: #222;
+      --link-color: #007bff;
+    }
+
+    body.dark-mode {
+      --bg-color: #121212;
+      --text-color: #eee;
+      --card-bg: #1e1e1e;
+      --footer-bg: #222;
+      --btn-bg: #4a90e2;
+      --btn-color: #fff;
+      --nav-bg: #1a1a1a;
+      --nav-text: #eee;
+      --link-color: #63a4ff;
+    }
+
+    /* Reset and base styles */
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      transition: background-color 0.3s ease, color 0.3s ease;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a {
+      color: var(--link-color);
+      text-decoration: none;
+    }
+    a:hover,
+    a:focus {
+      text-decoration: underline;
+    }
+
+    /* Header and Nav */
+    header {
+      background-color: var(--nav-bg);
+      color: var(--nav-text);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .section__container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+    nav.nav__container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 0;
+    }
+    .nav__logo {
+      font-weight: 700;
+      font-size: 1.5rem;
+      user-select: none;
+    }
+    .nav__logo span {
+      color: var(--btn-bg);
+    }
+    ul.nav__links {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      margin: 0;
+      padding: 0;
+    }
+    ul.nav__links li.link a {
+      font-weight: 500;
+      color: var(--nav-text);
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      transition: background-color 0.2s ease;
+    }
+    ul.nav__links li.link a:hover,
+    ul.nav__links li.link a:focus {
+      background-color: var(--btn-bg);
+      color: var(--btn-color);
+      outline: none;
+    }
+    .btn {
+      background-color: var(--btn-bg);
+      color: var(--btn-color);
+      border: none;
+      padding: 0.5rem 1.25rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: background-color 0.3s ease;
+      user-select: none;
+    }
+    .btn:hover,
+    .btn:focus {
+      background-color: darken(var(--btn-bg), 10%);
+      outline: none;
+    }
+
+    /* Dark mode toggle button */
+    #darkModeToggle {
+      font-size: 1.25rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--nav-text);
+      margin-left: 1rem;
+      user-select: none;
+      transition: color 0.3s ease;
+    }
+    #darkModeToggle:focus {
+      outline: 2px solid var(--btn-bg);
+      outline-offset: 2px;
+    }
+
+    /* Main content */
+    main {
+      flex-grow: 1;
+      padding: 2rem 1rem 4rem;
+    }
+    h2.section__header {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-weight: 700;
+      font-size: 2rem;
+    }
+
+    /* Service grid */
+    .service__grid {
+      display: grid;
+      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* Clickable cards as links */
+    .service__card {
+      display: flex;
+      flex-direction: column;
+      background-color: var(--card-bg);
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.6s forwards;
+    }
+    .service__card:nth-child(1) { animation-delay: 0.1s; }
+    .service__card:nth-child(2) { animation-delay: 0.3s; }
+    .service__card:nth-child(3) { animation-delay: 0.5s; }
+    .service__card:nth-child(4) { animation-delay: 0.7s; }
+
+    .service__card:hover,
+    .service__card:focus {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 20px rgba(0,0,0,0.2);
+      outline: none;
+    }
+
+    .service__card span {
+      font-size: 2.5rem;
+      color: var(--btn-bg);
+      margin-bottom: 1rem;
+      user-select: none;
+    }
+    .service__card h4 {
+      margin: 0 0 0.5rem;
+      font-weight: 700;
+      font-size: 1.25rem;
+    }
+    .service__card p {
+      flex-grow: 1;
+      font-size: 1rem;
+      line-height: 1.4;
+      margin-bottom: 1rem;
+      user-select: text;
+    }
+
+    /* Footer */
+    footer.footer {
+      background-color: var(--footer-bg);
+      color: var(--text-color);
+      padding: 2rem 1rem 1rem;
+      user-select: none;
+    }
+    .footer__container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: space-between;
+    }
+    .footer__col {
+      flex: 1 1 220px;
+    }
+    .footer__col h3, .footer__col h4 {
+      margin-top: 0;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+    .footer__col h3 span {
+      color: var(--btn-bg);
+    }
+    .footer__col p, .footer__col a {
+      margin: 0.25rem 0;
+      color: var(--text-color);
+      font-size: 0.9rem;
+    }
+    .footer__col a:hover,
+    .footer__col a:focus {
+      color: var(--btn-bg);
+      outline: none;
+    }
+
+    .footer__bar {
+      border-top: 1px solid rgba(0,0,0,0.1);
+      margin-top: 2rem;
+      padding-top: 1rem;
+      font-size: 0.9rem;
+      color: var(--text-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .footer__socials span {
+      font-size: 1.25rem;
+      margin-left: 0.75rem;
+      cursor: pointer;
+      user-select: none;
+      color: var(--btn-bg);
+      transition: color 0.3s ease;
+    }
+    .footer__socials span:hover,
+    .footer__socials span:focus {
+      color: darken(var(--btn-bg), 10%);
+      outline: none;
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 600px) {
+      nav.nav__container {
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+      ul.nav__links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+      }
+      .footer__container {
+        flex-direction: column;
+        align-items: center;
+      }
+      .footer__col {
+        flex: unset;
+        max-width: 320px;
+      }
+      .footer__bar {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="section__container nav__container">
+      <div class="nav__logo">MabiHealth<span>Care</span></div>
+      <ul class="nav__links">
+        <li class="link"><a href="/">Home</a></li>
+        <li class="link"><a href="/#about">About Us</a></li>
+        <li class="link"><a href="/#blog">Blog</a></li>
+        <li class="link"><a href="/contact">Contact</a></li>
+      </ul>
+      <div style="display: flex; align-items: center;">
+        <a href="/contact"><button class="btn">Contact Us</button></a>
+        <button id="darkModeToggle" aria-label="Toggle Dark Mode" title="Toggle Dark Mode" style="margin-left: 1rem;">🌙</button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="section__container">
+      <h2 class="section__header">Our Specialized Breast Cancer Services</h2>
+      <div class="service__grid">
+        <a href="/contact" class="service__card" tabindex="0">
+          <span><i class="ri-microscope-line"></i></span>
+          <h4>Diagnostics & Lab Testing</h4>
+          <p>Advanced diagnostics for early detection of breast cancer using mammograms, ultrasounds, and biopsies.</p>
+        </a>
+        <a href="/contact" class="service__card" tabindex="0">
+          <span><i class="ri-heart-pulse-line"></i></span>
+          <h4>Consultation & Screening</h4>
+          <p>Meet with Oncologists and Breast specialists for personalized screening and clinical exams.</p>
+        </a>
+        <a href="/contact" class="service__card" tabindex="0">
+          <span><i class="ri-hospital-line"></i></span>
+          <h4>Treatment Planning</h4>
+          <p>Chemotherapy, Radiation, Surgery, and Hormonal therapy plans tailored to each patient’s needs.</p>
+        </a>
+        <a href="/contact" class="service__card" tabindex="0">
+          <span><i class="ri-hand-heart-line"></i></span>
+          <h4>Support & Wellness</h4>
+          <p>Psychological counseling, nutrition support, and post-treatment care for long-term recovery.</p>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="section__container footer__container">
+      <div class="footer__col">
+        <h3>MabiHealth<span>Care</span></h3>
+        <p>Compassionate care and support on your breast cancer journey. Your health is our mission.</p>
+        <p>Personalized treatments, early detection, and continuous education for a healthier tomorrow.</p>
+      </div>
+      <div class="footer__col">
+        <h4>Links</h4>
+        <p><a href="/">Home</a></p>
+        <p><a href="/#about">About</a></p>
+        <p><a href="/contact">Contact</a></p>
+        <p><a href="/services">Services</a></p>
+      </div>
+      <div class="footer__col">
+        <h4>Contact</h4>
+        <p><i class="ri-map-pin-2-fill"></i> Tallinn, Estonia</p>
+        <p><i class="ri-mail-fill"></i> support@mabihealthcare.com</p>
+        <p><i class="ri-phone-fill"></i> (+372) 5687 6186</p>
+      </div>
+    </div>
+    <div class="footer__bar">
+      <div class="footer__bar__content">
+        <p>© 2025 MabiHealthCare. All rights reserved.</p>
+        <div class="footer__socials" role="list" aria-label="Social media links">
+          <span role="listitem" tabindex="0" aria-label="Facebook"><i class="ri-facebook-fill"></i></span>
+          <span role="listitem" tabindex="0" aria-label="Instagram"><i class="ri-instagram-line"></i></span>
+          <span role="listitem" tabindex="0" aria-label="Twitter"><i class="ri-twitter-fill"></i></span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const toggleBtn = document.getElementById('darkModeToggle');
+    const body = document.body;
+
+    // Load saved preference
+    if(localStorage.getItem('darkMode') === 'enabled'){
+      body.classList.add('dark-mode');
+      toggleBtn.textContent = '☀️';
+    } else {
+      toggleBtn.textContent = '🌙';
+    }
+
+    toggleBtn.addEventListener('click', () => {
+      body.classList.toggle('dark-mode');
+      if(body.classList.contains('dark-mode')){
+        localStorage.setItem('darkMode', 'enabled');
+        toggleBtn.textContent = '☀️';
+      } else {
+        localStorage.setItem('darkMode', 'disabled');
+        toggleBtn.textContent = '🌙';
+      }
+    });
+  </script>
+</body>
+</html>

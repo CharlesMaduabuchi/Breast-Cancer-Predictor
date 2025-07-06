@@ -91,6 +91,12 @@ def contact():
 
     return render_template("contact.html", message_sent=False)
 
+# Services
+@app.route("/services")
+def services():
+    return render_template("services.html")
+
+
 if __name__ == "__main__":
     import os
     port = int(os.environ.get("PORT", 5000))
