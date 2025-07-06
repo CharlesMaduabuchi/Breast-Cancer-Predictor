@@ -6,18 +6,19 @@ This is a machine learning-powered web application built with **Flask** that pre
 
 ## 📊 Features
 
-- 🔍 Predict breast cancer: Cancerous or Non-Cancerous
-- 💡 Powered by an XGBoost classification model
+- 🔍 Predict Breast Cancer: **Cancerous** or **Non-Cancerous**
+- 💡 Powered by an **XGBoost classification model**
 - 🌐 Responsive frontend using HTML, CSS, and Remix Icons
 - ⚙️ JSON API endpoint for programmatic access (`/predict`)
 - 📥 Supports both form submission and AJAX-based predictions
-- 🔐 CORS enabled for cross-origin requests
+- 🔐 **CORS** enabled for cross-origin requests
 
 ---
 
 ## 🚀 Demo
 
-> Coming soon! You can deploy it on [Render](https://render.com), [Railway](https://railway.app), or AWS EC2.
+> The demo is deployed on [Render](https://render.com)
+
 
 ---
 
